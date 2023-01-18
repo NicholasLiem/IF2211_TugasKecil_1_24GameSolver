@@ -6,11 +6,11 @@ int convertCharToInt(char cards){
         case 'A':
             return 1;
         case 'J':
-            return 10;
-        case 'Q':
             return 11;
-        case 'K':
+        case 'Q':
             return 12;
+        case 'K':
+            return 13;
         default:
             return int(cards)-48;
     }
