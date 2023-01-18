@@ -1,9 +1,10 @@
 #include <iostream>
 #include <string>
 #include <string.h>
+#include <cstdlib>
 using namespace std;
 
-//Todo: Randomizer, Save Hasil, Gabungin Op Kurung dan Num
+//Todo: Randomizer, Save Hasil
 
 int convertStrToInt(string* num){
     if (*num == "A"){
@@ -19,18 +20,14 @@ int convertStrToInt(string* num){
     }
 }
 
-int calculate(int num1, int num2, char op){
+float calculate(float num1, float num2, char op){
     switch(op){
         case '+':
             return (num1 + num2);
         case '-':
             return (num1 - num2);
         case '/':
-            if (num2 == 0){
-                return -1;
-            } else {
-                return num1/num2;
-            }
+            return num1/num2;
         default:
             return (num1 * num2);
     }
@@ -38,8 +35,11 @@ int calculate(int num1, int num2, char op){
 
 int main() {
     string n1, n2, n3, n4;
+    int i, j, k, l;
+    int a, b, c, d;
+    char op1, op2, op3;
     char operators[4] = {'+', '-', '*', '/'};
-    char permOp[256][3];
+    char permOp[64][3];
     int intCards[4];
     int permCards[24][4];
     
@@ -57,12 +57,12 @@ int main() {
 
     // Membuat permutasi operator
     int countOp = 0;
-    for(int i=0; i < 4; i++){
-        for(int j=0; j < 4; j++){
-            for(int k=0; k < 4; k++){
-                    permOp[i+j+k][0] = operators[i]; 
-                    permOp[i+j+k][1] = operators[j];
-                    permOp[i+j+k][2] = operators[k];
+    for(i = 0; i < 4; i++){
+        for(j = 0; j < 4; j++){
+            for(k = 0; k < 4; k++){
+                    permOp[countOp][0] = operators[i]; 
+                    permOp[countOp][1] = operators[j];
+                    permOp[countOp][2] = operators[k];
                     countOp++;
             }
         }
@@ -70,16 +70,16 @@ int main() {
 
     // Membuat permutasi angka
     int countNum = 0;
-    for(int i=0; i < 4; i++){
-        for(int j=0; j < 4; j++){
+    for(i = 0; i < 4; i++){
+        for(j = 0; j < 4; j++){
             if(i == j){
                 continue;
             }
-            for(int k=0; k < 4; k++){
+            for(k = 0; k < 4; k++){
                 if (k == j || k == i){
                     continue;
                 }
-                for(int l=0; l < 4; l++){
+                for(l = 0; l < 4; l++){
                     if (l == i || l == j || l == k){
                         continue;
                     }
@@ -96,13 +96,57 @@ int main() {
     // for(int i=0; i < countNum; i++){
     //     cout << permCards[i][0] << permCards[i][1]  << permCards[i][2]  << permCards[i][3]  << endl;
     // }
-    
-    cout << countOp << countNum  << endl;
 
-    // posisi kurung yang ada
-    // (a op b) op (c op d), ((a op b) op c) op d, (a op (b op c)) op d, a op ((b op c) op d), a op (b op (c op d))i
-    // untuk setiap permutasi angka dan permutasi operator ada 5 permutasi kurung
-    // total operasi yang dilakukan adalah  * 256 * 5 = 30.720 operasi
+    float total;
+    int totalVariation = 0;
+    for(i = 0; i < countNum ; i++){
+        for (j = 0; j < countOp ; j++){
+            a = (float) permCards[i][0];
+            b = (float) permCards[i][1];
+            c = (float) permCards[i][2];
+            d = (float) permCards[i][3];
+            op1 = permOp[j][0];
+            op2 = permOp[j][1];
+            op3 = permOp[j][2];
+
+            // Posisi Kurung 1 (a op b) op (c op d)
+            total = calculate(calculate(a, b, op1), calculate(c, d, op3), op2);
+            if (abs(total-24) < 0.00001){
+                cout << "(" << a << op1 << b << ")" << op2 << "(" << c << op3 << d << ")" << endl;
+                totalVariation++;
+            }
+
+            // Posisi Kurung 2 ((a op b) op c) op d
+            total = calculate(calculate(calculate(a, b, op1), c, op2), d, op3);
+            if (abs(total-24) < 0.00001){
+                cout << "((" << a << op1 << b << ")" << op2 << c << ")" << op3 << d << endl;
+                totalVariation++;
+            }
+
+            //Posisi Kurung 3 (a op (b op c)) op d
+            total = calculate(calculate(a, calculate(b, c, op2), op1), d, op3);
+            if (abs(total-24) < 0.00001){
+                cout << "(" << a << op1 << "(" << b << op2 << c << "))" << op3 << d << endl;
+                totalVariation++;
+            }
+
+            // Posisi Kurung 4 a op ((b op c) op d)
+            total = calculate(a, calculate(calculate(b, c, op2), d, op3), op1);
+            if (abs(total-24) < 0.00001){
+                cout << a << op1 << "((" << b << op2 << c << ")" << op3  << d << ")" << endl;
+                totalVariation++;
+            }
+
+            // Posisi Kurung 5 a op (b op (c op d))
+            total = calculate(a, calculate(b, calculate(c, d, op3), op2), op1); 
+            if (abs(total-24) < 0.00001){
+                cout << a << op1 << "(" << b << op2 << "(" << c << op3 << d << "))" << endl;
+                totalVariation++;
+            }
+        }
+    }
+
+    cout << "Ada sebanyak " << totalVariation << " solusi.";
 
     return 0;
 }
