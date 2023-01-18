@@ -4,7 +4,16 @@
 #include <cstdlib>
 using namespace std;
 
-//Todo: Randomizer, Save Hasil
+//Todo: Proses Handling Input, Randomizer, Save Hasil, Time Execution
+
+bool correctInput(string *num){
+    if (*num == "A" || *num == "J" || *num == "Q" || *num == "K" || *num == "2" || *num == "3" || *num == "4"
+    || *num == "5" || *num == "6" || *num == "7" || *num == "8" || *num == "9" || *num == "10"){
+        return 1;
+    } else {
+        return 0;
+    }
+}
 
 int convertStrToInt(string* num){
     if (*num == "A"){
@@ -34,6 +43,7 @@ float calculate(float num1, float num2, char op){
 }
 
 int main() {
+
     string n1, n2, n3, n4;
     int i, j, k, l;
     int a, b, c, d;
@@ -41,6 +51,7 @@ int main() {
     char operators[4] = {'+', '-', '*', '/'};
     char permOp[64][3];
     int intCards[4];
+    string tempCards[4];
     int permCards[24][4];
     
     cout << "Silahkan input 4 kartu: " << endl;
@@ -49,7 +60,15 @@ int main() {
     cin >> n3;
     cin >> n4;
 
-    // proses konversi string ke array of int
+    // Proses handling input
+    for(i = 0; i < 4; i++){
+        if(!checkIfCorrect(&tempCards[i])){
+            cout << "Input salah!" << endl;
+            break;
+        }
+    }
+
+    // Proses konversi string ke array of int
     intCards[0] = convertStrToInt(&n1);
     intCards[1] = convertStrToInt(&n2);
     intCards[2] = convertStrToInt(&n3);
@@ -93,14 +112,11 @@ int main() {
         }
     }
 
-    // for(int i=0; i < countNum; i++){
-    //     cout << permCards[i][0] << permCards[i][1]  << permCards[i][2]  << permCards[i][3]  << endl;
-    // }
-
     float total;
     int totalVariation = 0;
-    for(i = 0; i < countNum ; i++){
-        for (j = 0; j < countOp ; j++){
+    for(i = 0; i < countNum; i++){
+        for (j = 0; j < countOp; j++){
+            
             a = (float) permCards[i][0];
             b = (float) permCards[i][1];
             c = (float) permCards[i][2];
