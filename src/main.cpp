@@ -46,9 +46,13 @@ int main() {
         intCards[i] = convertCharToInt(charCards[i]);
     }
 
-    //bikin array permutasi dari num, array permutasi dari op
+    // bikin array permutasi dari num, array permutasi dari op
     // posisi kurung yang ada
-    // (a op b) op (c op d), ((a op b) op c) op d, (a op (b op c)) op d, a op ((b op c) op d), a op (b op (c op d)), 
+    // (a op b) op (c op d), ((a op b) op c) op d, (a op (b op c)) op d, a op ((b op c) op d), a op (b op (c op d))
+    // jumlah permutasi dari angka adalah -> 4! = 24 permutasi
+    // jumlah permutasi dari operator adalah -> 4 * 4 * 4 * 4 -> 4^4 = 256 permutasi
+    // untuk setiap permutasi angka dan permutasi operator ada 5 permutasi kurung
+    // total operasi yang dilakukan adalah 24 * 256 * 5 = 30.720 operasi
 
     return 0;
 }
