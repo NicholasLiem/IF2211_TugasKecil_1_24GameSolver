@@ -65,7 +65,7 @@ int menuMode(){
         if (choice == 1 || choice == 2 || choice == 3){
             break;
         }
-        cout << "Input tidak valid!" << endl;
+        cout << "Masukan tidak valid!" << endl;
     }
     return choice;
 }
@@ -100,7 +100,7 @@ int main() {
                 intCards[3] = convertStrToInt(&n4);
                 break;
             } else {
-                cout << "Input salah!" << endl;
+                cout << "Masukan tidak valid!" << endl;
             }
         }
     } else {
@@ -167,7 +167,6 @@ int main() {
             total = calculate(calculate(a, b, op1), calculate(c, d, op3), op2);
             if (abs(total-24) < 0.00001){
                 buffer << "(" << a << op1 << b << ")" << op2 << "(" << c << op3 << d << ")" << endl;
-                cout << "(" << a << op1 << b << ")" << op2 << "(" << c << op3 << d << ")" << endl;
                 solutions[totalVariation] = buffer.str();
                 totalVariation++;
             }
@@ -176,7 +175,6 @@ int main() {
             total = calculate(calculate(calculate(a, b, op1), c, op2), d, op3);
             if (abs(total-24) < 0.00001){
                 buffer << "((" << a << op1 << b << ")" << op2 << c << ")" << op3 << d << endl;
-                cout << "((" << a << op1 << b << ")" << op2 << c << ")" << op3 << d << endl;
                 solutions[totalVariation] = buffer.str();
                 totalVariation++;
             }
@@ -185,7 +183,6 @@ int main() {
             total = calculate(calculate(a, calculate(b, c, op2), op1), d, op3);
             if (abs(total-24) < 0.00001){
                 buffer << "(" << a << op1 << "(" << b << op2 << c << "))" << op3 << d << endl;
-                cout << "(" << a << op1 << "(" << b << op2 << c << "))" << op3 << d << endl;
                 solutions[totalVariation] = buffer.str();
                 totalVariation++;
             }
@@ -194,7 +191,6 @@ int main() {
             total = calculate(a, calculate(calculate(b, c, op2), d, op3), op1);
             if (abs(total-24) < 0.00001){
                 buffer << a << op1 << "((" << b << op2 << c << ")" << op3  << d << ")" << endl;
-                cout << a << op1 << "((" << b << op2 << c << ")" << op3  << d << ")" << endl;
                 solutions[totalVariation] = buffer.str();
                 totalVariation++;
             }
@@ -203,7 +199,6 @@ int main() {
             total = calculate(a, calculate(b, calculate(c, d, op3), op2), op1); 
             if (abs(total-24) < 0.00001){
                 buffer << a << op1 << "(" << b << op2 << "(" << c << op3 << d << "))" << endl;
-                cout << a << op1 << "(" << b << op2 << "(" << c << op3 << d << "))" << endl;
                 solutions[totalVariation] = buffer.str();
                 totalVariation++;
             }
@@ -211,11 +206,13 @@ int main() {
     }
     
     if (totalVariation > 0){
-        cout << "Ada sebanyak " << totalVariation << " solusi." << endl;
+        cout << "Ada sebanyak " << totalVariation << " solusi" << endl;
     } else {
-        cout << "Tidak ada solusi." << endl;
+        cout << "Tidak ada solusi" << endl;
         exit(0);
     }
+
+    cout << solutions[totalVariation-1] << endl;
 
     auto end = std::chrono::high_resolution_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
