@@ -81,8 +81,6 @@ int main() {
     char permOp[64][3];
     int intCards[4];
     int permCards[24][4];
-
-    string solutions[64*24*5];
     
     int choice = menuMode();
 
@@ -167,7 +165,6 @@ int main() {
             total = calculate(calculate(a, b, op1), calculate(c, d, op3), op2);
             if (abs(total-24) < 0.00001){
                 buffer << "(" << a << op1 << b << ")" << op2 << "(" << c << op3 << d << ")" << endl;
-                solutions[totalVariation] = buffer.str();
                 totalVariation++;
             }
 
@@ -175,7 +172,6 @@ int main() {
             total = calculate(calculate(calculate(a, b, op1), c, op2), d, op3);
             if (abs(total-24) < 0.00001){
                 buffer << "((" << a << op1 << b << ")" << op2 << c << ")" << op3 << d << endl;
-                solutions[totalVariation] = buffer.str();
                 totalVariation++;
             }
 
@@ -183,7 +179,6 @@ int main() {
             total = calculate(calculate(a, calculate(b, c, op2), op1), d, op3);
             if (abs(total-24) < 0.00001){
                 buffer << "(" << a << op1 << "(" << b << op2 << c << "))" << op3 << d << endl;
-                solutions[totalVariation] = buffer.str();
                 totalVariation++;
             }
 
@@ -191,7 +186,6 @@ int main() {
             total = calculate(a, calculate(calculate(b, c, op2), d, op3), op1);
             if (abs(total-24) < 0.00001){
                 buffer << a << op1 << "((" << b << op2 << c << ")" << op3  << d << ")" << endl;
-                solutions[totalVariation] = buffer.str();
                 totalVariation++;
             }
 
@@ -199,7 +193,6 @@ int main() {
             total = calculate(a, calculate(b, calculate(c, d, op3), op2), op1); 
             if (abs(total-24) < 0.00001){
                 buffer << a << op1 << "(" << b << op2 << "(" << c << op3 << d << "))" << endl;
-                solutions[totalVariation] = buffer.str();
                 totalVariation++;
             }
         }
@@ -212,7 +205,7 @@ int main() {
         exit(0);
     }
 
-    cout << solutions[totalVariation-1] << endl;
+    cout << buffer.str() << endl;
 
     auto end = std::chrono::high_resolution_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
@@ -230,7 +223,7 @@ int main() {
             cin >> namaFile;
             ofstream output;
             output.open("test/" + namaFile + ".txt");
-            output << solutions[totalVariation-1];
+            output << buffer.str();
             output.close();
             cout << "File " << namaFile << ".txt berhasil dibuat, silahkan cek di folder test" << endl;
             break;
