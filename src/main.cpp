@@ -209,8 +209,13 @@ int main() {
             }
         }
     }
-
-    cout << "Ada sebanyak " << totalVariation << " solusi." << endl;
+    
+    if (totalVariation > 0){
+        cout << "Ada sebanyak " << totalVariation << " solusi." << endl;
+    } else {
+        cout << "Tidak ada solusi." << endl;
+        exit(0);
+    }
 
     auto end = std::chrono::high_resolution_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
@@ -219,7 +224,7 @@ int main() {
 
     // Mekanisme saving file
     char saveChoice;
-    while(true){
+    while(true && totalVariation > 0){
         cout << "Apakah anda ingin menyimpan solusi ini? y/n" << endl;
         cin >> saveChoice;
         if(saveChoice == 'y' || saveChoice == 'Y'){
