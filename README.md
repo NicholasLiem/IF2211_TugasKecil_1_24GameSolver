@@ -14,15 +14,15 @@ Dalam hal ini kartu As, Jack, Queen, dan King memiliki nilai 1, 11, 12, dan 13. 
 brute force. Oleh sebab itu, tugas ini ditujukan untuk mengimplementasikan algoritma brute force dalam mencari solusi game 24.</p>
 
  ## **Implementation Screenshots**
-Screenshot contoh pengguna mengisi sendiri
+Screenshot contoh pengguna mengisi sendiri <br>
 <img src="./doc/assets/img1.png" alt="Source Code True"> <br>
-Screenshot hasil solusi sebelumnya
+Screenshot hasil solusi sebelumnya <br>
 <img src="./doc/assets/img2.png" alt="Source Code True"> <br>
-Screenshot file yang dihasilkan dari solusi sebelumnya
+Screenshot file yang dihasilkan dari solusi sebelumnya <br>
 <img src="./doc/assets/img3.png" alt="Source Code True"> <br>
-Screenshot contoh pengguna menggunakan randomizer 
+Screenshot contoh pengguna menggunakan randomizer <br>
 <img src="./doc/assets/img4.png" alt="Source Code True"> <br>
-Screenshot hasil solusi sebelumnya
+Screenshot hasil solusi sebelumnya <br>
 <img src="./doc/assets/img5.png" alt="Source Code True"> <br>
 
 ## **How to Run Program**
