@@ -60,8 +60,9 @@ int menuMode(){
         cout << "Pilih menu yang anda inginkan: " << endl;
         cout << "1. Random Card | Kartu yang dihasilkan akan digenerate secara random" << endl;
         cout << "2. Isi Sendiri | Masukkan nilai kartu sendiri" << endl;
+        cout << "3. Keluar Program | Exit" << endl;
         cin >> choice;
-        if (choice == 1 || choice == 2){
+        if (choice == 1 || choice == 2 || choice == 3){
             break;
         }
         cout << "Input tidak valid!" << endl;
@@ -88,7 +89,7 @@ int main() {
     if (choice == 1){
         randomizeCard(intCards);
         cout << "Kartu yang dihasilkan adalah: " << intCards[0] << " " << intCards[1] << " " << intCards[2] << " " << intCards[3] << endl;
-    } else {
+    } else if (choice == 2) {
         while(true){
             cout << "Silahkan input 4 kartu anda: " << endl;
             cin >> n1 >> n2 >> n3 >> n4;
@@ -102,6 +103,9 @@ int main() {
                 cout << "Input salah!" << endl;
             }
         }
+    } else {
+        cout << "Program dihentikan" << endl;
+        exit(0);
     }
 
     /* Begin time measurement */
@@ -222,13 +226,13 @@ int main() {
             string namaFile;
             cout << "Apa nama file yang anda akan simpan?" << endl;
             cin >> namaFile;
-            int arraySize = sizeof(solutions) / sizeof(solutions[0]);
             ofstream output;
-            output.open(namaFile);
-            for(i = 0; i < arraySize; i++){
+            output.open("test/" + namaFile + ".txt");
+            for(i = 0; i < totalVariation; i++){
                 output << solutions[i] << endl;
             }
             output.close();
+            cout << "File " << namaFile << ".txt berhasil dibuat, silahkan cek di folder test" << endl;
             break;
         } else if (saveChoice == 'n' || saveChoice == 'N'){
             cout << "Program dihentikan" << endl;
