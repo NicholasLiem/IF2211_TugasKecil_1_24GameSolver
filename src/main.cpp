@@ -1,14 +1,16 @@
 #include <iostream>
+#include <sstream> 
 #include <string>
 #include <string.h>
 #include <cstdlib>
+#include <fstream>
+#include <chrono>
 using namespace std;
-
-//Todo: Proses Handling Input, Randomizer, Save Hasil, Time Execution
 
 bool correctInput(string *num){
     if (*num == "A" || *num == "J" || *num == "Q" || *num == "K" || *num == "2" || *num == "3" || *num == "4"
-    || *num == "5" || *num == "6" || *num == "7" || *num == "8" || *num == "9" || *num == "10"){
+    || *num == "5" || *num == "6" || *num == "7" || *num == "8" || *num == "9" || *num == "10" || *num == "1"
+    || *num == "11" || *num == "12" || *num == "13"){
         return 1;
     } else {
         return 0;
@@ -42,37 +44,68 @@ float calculate(float num1, float num2, char op){
     }
 }
 
+void randomizeCard(int* card){
+    int i;
+    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+    srand(seed);
+    for(i = 0; i < 4; i++){
+        card[i] = 1 + (rand() % 13);
+    }
+}
+
+int menuMode(){
+    int choice;
+    cout << "Selamat datang di 24 Game Solver!" << endl;
+    while(true){
+        cout << "Pilih menu yang anda inginkan: " << endl;
+        cout << "1. Random Card | Kartu yang dihasilkan akan digenerate secara random" << endl;
+        cout << "2. Isi Sendiri | Masukkan nilai kartu sendiri" << endl;
+        cin >> choice;
+        if (choice == 1 || choice == 2){
+            break;
+        }
+        cout << "Input tidak valid!" << endl;
+    }
+    return choice;
+}
+
 int main() {
 
     string n1, n2, n3, n4;
     int i, j, k, l;
     int a, b, c, d;
     char op1, op2, op3;
+
     char operators[4] = {'+', '-', '*', '/'};
     char permOp[64][3];
     int intCards[4];
-    string tempCards[4];
     int permCards[24][4];
-    
-    cout << "Silahkan input 4 kartu: " << endl;
-    cin >> n1;
-    cin >> n2;
-    cin >> n3;
-    cin >> n4;
 
-    // Proses handling input
-    for(i = 0; i < 4; i++){
-        if(!checkIfCorrect(&tempCards[i])){
-            cout << "Input salah!" << endl;
-            break;
+    string solutions[64*24*5];
+    
+    int choice = menuMode();
+
+    if (choice == 1){
+        randomizeCard(intCards);
+        cout << "Kartu yang dihasilkan adalah: " << intCards[0] << " " << intCards[1] << " " << intCards[2] << " " << intCards[3] << endl;
+    } else {
+        while(true){
+            cout << "Silahkan input 4 kartu anda: " << endl;
+            cin >> n1 >> n2 >> n3 >> n4;
+            if (correctInput(&n1) && correctInput(&n2) && correctInput(&n3) && correctInput(&n4)){
+                intCards[0] = convertStrToInt(&n1);
+                intCards[1] = convertStrToInt(&n2);
+                intCards[2] = convertStrToInt(&n3);
+                intCards[3] = convertStrToInt(&n4);
+                break;
+            } else {
+                cout << "Input salah!" << endl;
+            }
         }
     }
 
-    // Proses konversi string ke array of int
-    intCards[0] = convertStrToInt(&n1);
-    intCards[1] = convertStrToInt(&n2);
-    intCards[2] = convertStrToInt(&n3);
-    intCards[3] = convertStrToInt(&n4);
+    /* Begin time measurement */
+    auto begin = std::chrono::high_resolution_clock::now();
 
     // Membuat permutasi operator
     int countOp = 0;
@@ -114,6 +147,7 @@ int main() {
 
     float total;
     int totalVariation = 0;
+    std::stringstream buffer;
     for(i = 0; i < countNum; i++){
         for (j = 0; j < countOp; j++){
             
@@ -128,41 +162,79 @@ int main() {
             // Posisi Kurung 1 (a op b) op (c op d)
             total = calculate(calculate(a, b, op1), calculate(c, d, op3), op2);
             if (abs(total-24) < 0.00001){
+                buffer << "(" << a << op1 << b << ")" << op2 << "(" << c << op3 << d << ")" << endl;
                 cout << "(" << a << op1 << b << ")" << op2 << "(" << c << op3 << d << ")" << endl;
+                solutions[totalVariation] = buffer.str();
                 totalVariation++;
             }
 
             // Posisi Kurung 2 ((a op b) op c) op d
             total = calculate(calculate(calculate(a, b, op1), c, op2), d, op3);
             if (abs(total-24) < 0.00001){
+                buffer << "((" << a << op1 << b << ")" << op2 << c << ")" << op3 << d << endl;
                 cout << "((" << a << op1 << b << ")" << op2 << c << ")" << op3 << d << endl;
+                solutions[totalVariation] = buffer.str();
                 totalVariation++;
             }
 
             //Posisi Kurung 3 (a op (b op c)) op d
             total = calculate(calculate(a, calculate(b, c, op2), op1), d, op3);
             if (abs(total-24) < 0.00001){
+                buffer << "(" << a << op1 << "(" << b << op2 << c << "))" << op3 << d << endl;
                 cout << "(" << a << op1 << "(" << b << op2 << c << "))" << op3 << d << endl;
+                solutions[totalVariation] = buffer.str();
                 totalVariation++;
             }
 
             // Posisi Kurung 4 a op ((b op c) op d)
             total = calculate(a, calculate(calculate(b, c, op2), d, op3), op1);
             if (abs(total-24) < 0.00001){
+                buffer << a << op1 << "((" << b << op2 << c << ")" << op3  << d << ")" << endl;
                 cout << a << op1 << "((" << b << op2 << c << ")" << op3  << d << ")" << endl;
+                solutions[totalVariation] = buffer.str();
                 totalVariation++;
             }
 
             // Posisi Kurung 5 a op (b op (c op d))
             total = calculate(a, calculate(b, calculate(c, d, op3), op2), op1); 
             if (abs(total-24) < 0.00001){
+                buffer << a << op1 << "(" << b << op2 << "(" << c << op3 << d << "))" << endl;
                 cout << a << op1 << "(" << b << op2 << "(" << c << op3 << d << "))" << endl;
+                solutions[totalVariation] = buffer.str();
                 totalVariation++;
             }
         }
     }
 
-    cout << "Ada sebanyak " << totalVariation << " solusi.";
+    cout << "Ada sebanyak " << totalVariation << " solusi." << endl;
+
+    auto end = std::chrono::high_resolution_clock::now();
+    auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
+
+    cout << "Time Measured: " << (float) elapsed.count() * 1e-9 << " seconds" << endl;
+
+    // Mekanisme saving file
+    char saveChoice;
+    while(true){
+        cout << "Apakah anda ingin menyimpan solusi ini? y/n" << endl;
+        cin >> saveChoice;
+        if(saveChoice == 'y' || saveChoice == 'Y'){
+            string namaFile;
+            cout << "Apa nama file yang anda akan simpan?" << endl;
+            cin >> namaFile;
+            int arraySize = sizeof(solutions) / sizeof(solutions[0]);
+            ofstream output;
+            output.open(namaFile);
+            for(i = 0; i < arraySize; i++){
+                output << solutions[i] << endl;
+            }
+            output.close();
+            break;
+        } else if (saveChoice == 'n' || saveChoice == 'N'){
+            cout << "Program dihentikan" << endl;
+            break;
+        }
+    }
 
     return 0;
 }
