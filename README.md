@@ -26,12 +26,13 @@ Screenshot hasil solusi sebelumnya <br>
 <img src="./doc/assets/img5.png" alt="Source Code True"> <br>
 
 ## **How to Run Program**
-1. Clone this repository <br>
+1. Klon repositori ini <br>
 `$ git clone https://github.com/NicholasLiem/Tucil1_13521135.git `
-2. Create executable file <br>
+2. Kompilasi file executablenya <br>
 `$ g++ -o bin\24solver.exe src\main.cpp`
-3. Run the executable file <br>
+3. Jalankan file executablenya <br>
 `$ ./bin/24solver`
+4. Catatan tambahan: Gunakan spasi sebagai pemisah angka
 
 ## **Author**
 Nicholas Liem - 13521135
