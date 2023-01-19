@@ -228,9 +228,7 @@ int main() {
             cin >> namaFile;
             ofstream output;
             output.open("test/" + namaFile + ".txt");
-            for(i = 0; i < totalVariation; i++){
-                output << solutions[i] << endl;
-            }
+            output << solutions[totalVariation-1];
             output.close();
             cout << "File " << namaFile << ".txt berhasil dibuat, silahkan cek di folder test" << endl;
             break;

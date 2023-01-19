@@ -32,8 +32,7 @@ Screenshot hasil output *false* pada program
 `$ ./bin/24solver`
 
 ## **Author**
-| Nama | NIM |
-| Nicholas Liem | 13521135 |
+Nicholas Liem - 13521135
 
 ## **Folders and Files Description**
 1. Folder bin <br>
