@@ -18,12 +18,20 @@ Screenshot contoh pengguna mengisi sendiri <br>
 <img src="./doc/assets/img1.png" alt="Source Code True"> <br>
 Screenshot hasil solusi sebelumnya <br>
 <img src="./doc/assets/img2.png" alt="Source Code True"> <br>
-Screenshot file yang dihasilkan dari solusi sebelumnya <br>
+Screenshot contoh pengguna kartu random <br>
 <img src="./doc/assets/img3.png" alt="Source Code True"> <br>
-Screenshot contoh pengguna menggunakan randomizer <br>
-<img src="./doc/assets/img4.png" alt="Source Code True"> <br>
 Screenshot hasil solusi sebelumnya <br>
+<img src="./doc/assets/img4.png" alt="Source Code True"> <br>
+Screenshot kasus input tidak valid <br>
 <img src="./doc/assets/img5.png" alt="Source Code True"> <br>
+Screenshot kasus tidak menyimpan <br>
+<img src="./doc/assets/nosave.png" alt="Source Code True"> <br>
+Screenshot kasus tidak ada solusi <br>
+<img src="./doc/assets/nosol.png" alt="Source Code True"> <br>
+Screenshot file tersimpan <br>
+<img src="./doc/assets/savingfile.png" alt="Source Code True"> <br>
+
+
 
 ## **How to Run Program**
 1. Klon repositori ini <br>
