@@ -157,6 +157,7 @@ int main() {
             b = (float) permCards[i][1];
             c = (float) permCards[i][2];
             d = (float) permCards[i][3];
+            
             op1 = permOp[j][0];
             op2 = permOp[j][1];
             op3 = permOp[j][2];
