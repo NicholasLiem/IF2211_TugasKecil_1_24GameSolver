@@ -70,6 +70,32 @@ int menuMode(){
     return choice;
 }
 
+void clearDuplicate(int cards[24][4]){
+    int count = 0;
+    for(int i = 0; i < 24; i++){
+        for(int j = i + 1; j < 24 ; j++){
+            
+            if (cards[j][0] == -1){
+                continue;
+            } else {
+                count = 0;
+                for(int k = 0; k < 4; k++){
+                    if (cards[i][k] == cards[j][k]){
+                        count++;
+                    } else {
+                        break;
+                    }
+                }
+                if (count == 4){
+                    for(int k = 0; k < 4; k++){
+                        cards[j][k] = -1;
+                    }
+                }
+            }
+        }
+    }
+}
+
 int main() {
 
     string n1, n2, n3, n4;
@@ -106,6 +132,10 @@ int main() {
         exit(0);
     }
 
+    char saveChoice;
+    cout << "Apakah anda mau untuk menghitung tanpa solusi double? (jika ada angka sama) (y/n)" << endl;
+    cin >> saveChoice;
+    
     /* Begin time measurement */
     auto begin = std::chrono::high_resolution_clock::now();
 
@@ -145,6 +175,10 @@ int main() {
                 }
             }
         }
+    }
+
+    if (saveChoice == 'y' || saveChoice == 'Y'){
+        clearDuplicate(permCards);
     }
 
     float total;
@@ -199,6 +233,9 @@ int main() {
         }
     }
     
+    auto end = std::chrono::high_resolution_clock::now();
+    auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
+
     if (totalVariation > 0){
         cout << "Ada sebanyak " << totalVariation << " solusi" << endl;
     } else {
@@ -207,14 +244,9 @@ int main() {
     }
 
     cout << buffer.str() << endl;
-
-    auto end = std::chrono::high_resolution_clock::now();
-    auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
-
-    cout << "Time Measured: " << (float) elapsed.count() * 1e-9 << " seconds" << endl;
+    cout << "Waktu terukur: " << elapsed.count() * 1e-9 << " seconds" << endl;
 
     // Mekanisme saving file
-    char saveChoice;
     while(true && totalVariation > 0){
         cout << "Apakah anda ingin menyimpan solusi ini? y/n" << endl;
         cin >> saveChoice;
