@@ -3,7 +3,6 @@
 ## **Table of Contents**
 * [Program Description](#program-description)
 * [How to Run Program](#how-to-run-program)
-* [Implementation Screenshots](#implementation-screenshots)
 * [Author](#author)
 * [Folders and Files Description](#folders-and-files-description)
 * [Extras](#meme-section)
@@ -12,24 +11,6 @@
 <p> 24 Game adalah suatu game yang memiliki objektif untuk menghasilkan angka 24 diberikan 4 kartu remi dan sejumlah operator aritmetika. 
 Dalam hal ini kartu As, Jack, Queen, dan King memiliki nilai 1, 11, 12, dan 13. Banyaknya kombinasi cara ini dapat dicari menggunakan algoritma
 brute force. Oleh sebab itu, tugas ini ditujukan untuk mengimplementasikan algoritma brute force dalam mencari solusi game 24.</p>
-
- ## **Implementation Screenshots**
-Screenshot contoh pengguna mengisi sendiri <br>
-<img src="./doc/assets/img1.png" alt="Source Code True"> <br>
-Screenshot hasil solusi sebelumnya <br>
-<img src="./doc/assets/img2.png" alt="Source Code True"> <br>
-Screenshot contoh pengguna kartu random <br>
-<img src="./doc/assets/img3.png" alt="Source Code True"> <br>
-Screenshot hasil solusi sebelumnya <br>
-<img src="./doc/assets/img4.png" alt="Source Code True"> <br>
-Screenshot kasus input tidak valid <br>
-<img src="./doc/assets/img5.png" alt="Source Code True"> <br>
-Screenshot kasus tidak menyimpan <br>
-<img src="./doc/assets/nosave.png" alt="Source Code True"> <br>
-Screenshot kasus tidak ada solusi <br>
-<img src="./doc/assets/nosol.png" alt="Source Code True"> <br>
-Screenshot file tersimpan <br>
-<img src="./doc/assets/savingfile.png" alt="Source Code True"> <br>
 
 
 
