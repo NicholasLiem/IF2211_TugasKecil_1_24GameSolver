@@ -17,7 +17,7 @@ brute force. Oleh sebab itu, tugas ini ditujukan untuk mengimplementasikan algor
 ## **How to Run Program**
 1. Klon repositori ini <br>
 `$ git clone https://github.com/NicholasLiem/Tucil1_13521135.git `
-2. Kompilasi file executablenya <br>
+2. Kompilasi file executablenya (Pastikan berada difolder Tucil1_13521135) <br>
 `$ g++ -o bin\24solver.exe src\main.cpp`
 3. Jalankan file executablenya <br>
 `$ ./bin/24solver`
